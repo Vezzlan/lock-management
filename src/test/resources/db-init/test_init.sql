@@ -1,0 +1,1 @@
+CREATE USER postgres_test WITH PASSWORD 'change-me';
