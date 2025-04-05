@@ -30,7 +30,7 @@ class OrdersServiceTest {
     @DisplayName("Should save only one order when multiple concurrent booking attempts are made")
     void shouldSaveOnlyOneOrderWhenConcurrentBookingsAttempted() throws InterruptedException {
         final var court = "BANA 1";
-        final var booking = "10:00";
+        final var time = "10:00";
         final int threadCount = 50;
 
         try (ExecutorService executor = Executors.newFixedThreadPool(threadCount)) {
@@ -39,7 +39,7 @@ class OrdersServiceTest {
             for (int i = 0; i < threadCount; i++) {
                 executor.submit(() -> {
                     try {
-                        orderService.saveOrder(court, booking);
+                        orderService.saveOrder(court, time);
                     } finally {
                         latch.countDown();
                     }

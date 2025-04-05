@@ -12,7 +12,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @Table(name = "orders", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"court", "booking"})
+        @UniqueConstraint(columnNames = {"court", "time"})
 })
 public class Orders {
 
@@ -22,16 +22,16 @@ public class Orders {
 
     private String court;
 
-    private String booking;
+    private String time;
 
-    public Orders(String court, String booking) {
+    public Orders(String court, String time) {
         this.court = court;
-        this.booking = booking;
+        this.time= time;
     }
 
-    public Orders(UUID id, String court, String booking) {
+    public Orders(UUID id, String court, String time) {
         this.id = id;
         this.court = court;
-        this.booking = booking;
+        this.time = time;
     }
 }

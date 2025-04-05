@@ -6,13 +6,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
 @Service
 public class OrderService {
-
-    private final Lock lock = new ReentrantLock();
 
     private final OrderRepository orderRepository;
 
@@ -22,17 +17,17 @@ public class OrderService {
     }
 
     @Transactional
-    public void saveOrder(String court, String booking) {
-        orderRepository.findByCourtAndBooking(court, booking)
+    public void saveOrder(String court, String time) {
+        orderRepository.findByCourtAndTime(court, time)
                 .ifPresentOrElse(
-                        (order) -> System.out.println("Order already exists " + order.getCourt() + " " + order.getBooking()),
-                        () -> orderRepository.save(generate(court, booking)));
+                        (order) -> System.out.println("Order already exists " + order.getCourt() + " " + order.getTime()),
+                        () -> orderRepository.save(generate(court, time)));
     }
 
-    private Orders generate(String court, String booking) {
+    private Orders generate(String court, String time) {
         return Orders.builder()
                 .court(court)
-                .booking(booking)
+                .time(time)
                 .build();
     }
 }

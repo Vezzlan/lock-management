@@ -1,1 +1,1 @@
-ALTER TABLE orders ADD COLUMN booking varchar;
+ALTER TABLE orders ADD COLUMN time varchar;
